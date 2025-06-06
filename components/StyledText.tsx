@@ -29,16 +29,12 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.xxl,
     fontWeight: FONT_WEIGHTS.bold as any,
     color: COLORS.neutral.text.primary,
-    marginBottom: SPACING.md,
-    marginTop: SPACING.md,
   },
   subheading: {
     fontSize: FONT_SIZES.lg,
     fontWeight: FONT_WEIGHTS.medium as any,
     color: COLORS.neutral.text.primary,
-    marginBottom: SPACING.md,
-    marginTop: SPACING.md,
-    },
+  },
   body: {
     fontSize: FONT_SIZES.md,
     color: COLORS.neutral.text.primary,

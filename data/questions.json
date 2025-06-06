@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "question": "How can I save money next month?",
+    "answer": "You can save money by reducing your spending on non-essential items and increasing your savings."
+  },
+  {
+    "id": 2,
+    "question": "What are my top spending categories?",
+    "answer": "Your top spending categories are food, housing, transportation, and entertainment."
+  },
+  {
+    "id": 3,
+    "question": "Can you suggest a budget for me?",
+    "answer": "Sure, I can suggest a budget for you. Would you like me to create a budget for you?"
+  }
+]

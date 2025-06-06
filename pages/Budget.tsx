@@ -2,7 +2,6 @@ import React, { useMemo, useState } from "react";
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
@@ -11,16 +10,17 @@ import {
 import PageWrapper from "../components/PageWrapper";
 import { COLORS } from "../constants/theme";
 import Header from "../components/Header";
-import { Heading } from "../components/StyledText";
+import { BodyText, Heading } from "../components/StyledText";
 import transactionsDummyData from "../data/transactions.json";
 import { getCategorySpending, getUniqueCategories } from "../utils";
+import Input from "../components/Input";
+import { commonStyles } from "../styles/commonStyles";
 
 const initialCategories = getUniqueCategories(transactionsDummyData).map((category) => ({
     name: category,
     spent: getCategorySpending(transactionsDummyData, category),
     budget: 0,
 }));
-
 
 const Budget = () => {
   const [categories, setCategories] = useState(initialCategories);
@@ -46,31 +46,31 @@ const Budget = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 32, paddingHorizontal: 0 }}
       >
-        <Heading variant="heading">Monthly Budget</Heading>
+        <Heading variant="heading" style={styles.header}>Monthly Budget</Heading>
         <View style={styles.section}>
-          <View style={styles.rowBetween}>
+          <View style={[commonStyles.row, commonStyles.spaceBetween, commonStyles.alignCenter]}>
             <View>
-              <Text style={styles.label}>Total Budget</Text>
-              <Text style={styles.subLabel}>
+              <BodyText variant="subheading" style={styles.label}>Total Budget</BodyText>
+              <BodyText variant="body" style={styles.subLabel}>
                 Total budget for your categories
-              </Text>
+              </BodyText>
             </View>
-            <Text style={styles.totalBudget}>
+            <BodyText variant="subheading" style={styles.totalBudget}>
               ${totalBudget.toLocaleString()}
-            </Text>
+            </BodyText>
           </View>
         </View>
-        <Text style={styles.header}>Categories</Text>
+        <Heading variant="heading" style={styles.header}>Categories</Heading>
         {categories.map((category, idx) => (
           <View key={category.name} style={styles.categoryBlock}>
-            <View style={styles.rowBetween}>
+            <View style={[commonStyles.row, commonStyles.spaceBetween, commonStyles.alignCenter]}>
               <View>
-                <Text style={styles.catName}>{category.name}</Text>
-                <Text style={styles.catDesc}>
+                <BodyText variant="subheading" style={styles.catName}>{category.name}</BodyText>
+                <BodyText variant="body" style={styles.catDesc}>
                   Set a budget for your spending
-                </Text>
+                </BodyText>
               </View>
-              <Text style={styles.catBudget}>${category.budget}</Text>
+              <BodyText variant="subheading" style={styles.catBudget}>${category.budget}</BodyText>
             </View>
             <View style={styles.progressBarBg}>
               <View
@@ -84,27 +84,25 @@ const Budget = () => {
                 ]}
               />
             </View>
-            <View style={styles.rowEnd}>
-              <Text style={styles.catSpent}>{category.spent}</Text>
+            <View style={[commonStyles.row, commonStyles.justifyEnd]}>
+              <BodyText variant="body" style={styles.catSpent}>{category.spent}</BodyText>
             </View>
-            <Text style={styles.inputLabel}>Set Budget</Text>
-            <TextInput
-              style={styles.input}
+            <Input
               value={category.budget.toString()}
               onChangeText={(value) => handleCategoryBudgetChange(idx, value)}
-              keyboardType="numeric"
               placeholder="$0"
-            />
+              label="Set Budget"
+            />  
             {idx !== categories.length - 1 && <View style={styles.divider} />}
           </View>
         ))}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.saveButton}
           onPress={handleSave}
           activeOpacity={0.85}
         >
-          <Text style={styles.saveButtonText}>Save Budgets</Text>
-        </TouchableOpacity>
+          <BodyText variant="subheading" style={styles.saveButtonText}>Save Budgets</BodyText>
+        </TouchableOpacity> */}
       </ScrollView>
     </PageWrapper>
   );
@@ -112,14 +110,11 @@ const Budget = () => {
 
 const styles = StyleSheet.create({
   header: {
-    fontSize: 24,
-    fontWeight: "bold",
     color: COLORS.primary.main,
-    marginTop: 12,
     marginBottom: 18,
   },
   section: {
-    marginBottom: 18,
+    marginBottom: 8,
   },
   sectionTitle: {
     fontSize: 20,
@@ -128,23 +123,15 @@ const styles = StyleSheet.create({
     marginTop: 18,
     marginBottom: 10,
   },
-  rowBetween: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
   rowEnd: {
     flexDirection: "row",
     justifyContent: "flex-end",
   },
   label: {
-    fontSize: 17,
-    fontWeight: "bold",
     color: COLORS.primary.main,
   },
   subLabel: {
     color: COLORS.neutral.text.secondary,
-    fontSize: 14,
   },
   totalBudget: {
     fontSize: 20,
@@ -153,12 +140,9 @@ const styles = StyleSheet.create({
   },
   categoryBlock: {
     marginBottom: 0,
-    paddingTop: 8,
     backgroundColor: "transparent",
   },
   catName: {
-    fontSize: 16,
-    fontWeight: "bold",
     color: COLORS.primary.main,
   },
   catDesc: {
@@ -166,12 +150,10 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   catBudget: {
-    fontSize: 16,
-    fontWeight: "bold",
     color: COLORS.primary.main,
   },
   progressBarBg: {
-    height: 8,
+    height: 6,
     backgroundColor: COLORS.neutral.border,
     borderRadius: 8,
     marginVertical: 8,
@@ -179,36 +161,17 @@ const styles = StyleSheet.create({
   },
   progressBarFill: {
     height: 8,
-    backgroundColor: COLORS.primary.main,
+    backgroundColor: COLORS.secondary.dark,
     borderRadius: 8,
   },
   catSpent: {
-    fontSize: 15,
     color: COLORS.neutral.text.secondary,
-  },
-  inputLabel: {
-    fontSize: 14,
-    color: COLORS.primary.main,
-    marginBottom: 4,
-    marginTop: 2,
-  },
-  input: {
-    borderWidth: 1,
-    height: 40,
-    borderColor: COLORS.neutral.border,
-    borderRadius: 8,
-    padding: 8,
-    fontSize: 16,
-    color: COLORS.primary.main,
-    backgroundColor: COLORS.neutral.white,
-    marginBottom: 2,
   },
   divider: {
     height: 1,
     backgroundColor: COLORS.neutral.border,
     marginTop: 18,
     marginBottom: 8,
-    marginHorizontal: -16,
   },
   saveButton: {
     backgroundColor: COLORS.secondary.dark,

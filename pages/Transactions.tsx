@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   SectionList,
   TouchableOpacity,
 } from "react-native";
 import PageWrapper from "../components/PageWrapper";
-import { COLORS } from "../constants/theme";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { COLORS, SPACING } from "../constants/theme";
+import { MaterialIcons } from "@expo/vector-icons";
 import transactionsDummyData from "../data/transactions.json";
 import { Transaction } from "../types/transactions";
 import { groupTransactionsByCategory, getTotalSpending } from "../utils";
 import TransactionDetails from "../components/TransactionDetails";
 import Header from "../components/Header";
+import { BodyText, Subheading } from "../components/StyledText";
+import { commonStyles } from "../styles/commonStyles";
 
 const transactions: Transaction[] = transactionsDummyData;
 const totalSpending = getTotalSpending(transactions);
@@ -43,25 +44,25 @@ const Transactions = () => {
               onPress={() => handleToggle(item.category)}
               activeOpacity={0.7}
             >
-              <View style={styles.categoryRow}>
-                <View style={styles.iconBox}>
+              <View style={[styles.categoryRow, commonStyles.row, commonStyles.spaceBetween, commonStyles.alignCenter]}>
+                <View style={[styles.iconBox, commonStyles.alignCenter, commonStyles.justifyCenter]}>
                   <MaterialIcons
                     name="category"
                     size={24}
                     color={COLORS.primary.main}
                   />
                 </View>
-                <View style={{ flex: 1, justifyContent: "center" }}>
-                  <Text style={styles.categoryName}>{item.category}</Text>
-                  <Text style={styles.transactionCount}>
+                <View style={[commonStyles.grow, commonStyles.justifyCenter]}>
+                  <BodyText variant="subheading" style={styles.categoryName}>{item.category}</BodyText>
+                  <BodyText variant="body" style={styles.transactionCount}>
                     {item.data.length}{" "}
                     {item.data.length === 1 ? "transaction" : "transactions"}
-                  </Text>
+                  </BodyText>
                 </View>
-                <Text style={styles.amount}>
+                <BodyText variant="body" style={styles.amount}>
                   $
                   {item.data.reduce((sum, tx) => sum + tx.amount, 0).toFixed(2)}
-                </Text>
+                </BodyText>
               </View>
             </TouchableOpacity>
             {expanded === item.category && (
@@ -70,14 +71,14 @@ const Transactions = () => {
           </View>
         )}
         renderSectionHeader={({ section: { title } }) => (
-          <Text style={styles.sectionTitle}>{title}</Text>
+          <BodyText variant="body" style={styles.sectionTitle}>{title}</BodyText>
         )}
         showsVerticalScrollIndicator={false}
         stickySectionHeadersEnabled={false}
         ListFooterComponent={
           <View style={styles.totalRow}>
-            <Text style={styles.totalLabel}>Total Spending</Text>
-            <Text style={styles.totalAmount}>${totalSpending.toFixed(2)}</Text>
+            <Subheading variant="subheading" style={styles.footerText}>Total Spending</Subheading>
+            <BodyText variant="body" style={styles.footerText}>${totalSpending.toFixed(2)}</BodyText>
           </View>
         }
       />
@@ -90,11 +91,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: COLORS.primary.main,
-    marginBottom: 20,
+    marginBottom: SPACING.md,
   },
   categoryRow: {
-    flexDirection: "row",
-    alignItems: "center",
     marginBottom: 24,
     minHeight: 56,
   },
@@ -103,28 +102,18 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 12,
     backgroundColor: COLORS.neutral.background,
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 16,
+    marginRight: SPACING.sm,
   },
   categoryName: {
-    fontSize: 18,
-    fontWeight: "500",
     color: COLORS.primary.main,
   },
   transactionCount: {
-    fontSize: 15,
     color: COLORS.secondary.dark,
-    marginTop: 2,
     textDecorationLine: "underline",
-    fontWeight: "400",
   },
   amount: {
-    fontSize: 18,
-    fontWeight: "500",
     color: COLORS.primary.main,
-    marginLeft: 12,
-    alignSelf: "center",
+    marginLeft: SPACING.sm,
   },
   totalRow: {
     flexDirection: "row",
@@ -135,13 +124,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: COLORS.neutral.border,
   },
-  totalLabel: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: COLORS.primary.main,
-  },
-  totalAmount: {
-    fontSize: 18,
+  footerText: {
     fontWeight: "bold",
     color: COLORS.primary.main,
   },

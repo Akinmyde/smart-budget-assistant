@@ -6,7 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { COLORS } from "../constants/theme";
+import { COLORS, SPACING } from "../constants/theme";
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    marginHorizontal: 20,
+    marginHorizontal: SPACING.md,
   },
 });
 

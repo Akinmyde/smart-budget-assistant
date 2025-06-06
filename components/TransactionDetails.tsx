@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet  } from "react-native";
+import { View, StyleSheet  } from "react-native";
 import { Transaction } from "../types/transactions";
 import { COLORS } from "../constants/theme";
 import { dateFormatter } from "../utils";
-
+import { BodyText } from "./StyledText";
+import { commonStyles } from "../styles/commonStyles";
 interface TransactionDetailsProps {
     transactions: Transaction[];
 }
@@ -12,10 +13,10 @@ const TransactionDetails = ({ transactions }: TransactionDetailsProps) => {
     return (
       <View style={styles.transactionList}>
         {transactions.map((transaction) => (
-          <View key={transaction.id} style={styles.transactionRow}>
-            <Text style={styles.transactionDesc}>{transaction.description}</Text>
-            <Text style={styles.transactionDate}>{dateFormatter(transaction.date)}</Text>
-            <Text style={styles.transactionAmount}>${transaction.amount.toFixed(2)}</Text>
+          <View key={transaction.id} style={[styles.transactionRow, commonStyles.row, commonStyles.spaceBetween, commonStyles.alignCenter]}>
+            <BodyText variant="body" style={styles.transactionDesc}>{transaction.description}</BodyText>
+            <BodyText variant="body" style={styles.transactionDate}>{dateFormatter(transaction.date)}</BodyText>
+            <BodyText variant="body" style={styles.transactionAmount}>${transaction.amount.toFixed(2)}</BodyText>
           </View>
         ))}
       </View>
@@ -28,9 +29,7 @@ const styles = StyleSheet.create({
       marginBottom: 12,
     },
     transactionRow: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
+
       paddingVertical: 4,
     },
     transactionDesc: {

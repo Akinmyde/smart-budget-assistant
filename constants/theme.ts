@@ -20,6 +20,14 @@ export const COLORS = {
         light: '#2ECC71',   // Light green
         dark: '#219A52',    // Dark green
     },
+    
+    chat: {
+        background: '#E0E0EA',
+        text: {
+            primary: '#2C3E50',
+            secondary: '#7F8C8D',
+        },
+    },
 
     // Neutral colors
     neutral: {

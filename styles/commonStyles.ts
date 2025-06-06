@@ -31,7 +31,13 @@ export const commonStyles = StyleSheet.create({
       alignItems: 'flex-start',
     },
     alignEnd: {
-      alignItems: 'flex-end',
+      alignItems: 'flex-end',   
+    },
+    alignCenter: {
+      alignItems: 'center',
+    },
+    justifyCenter: {
+      justifyContent: 'center',
     },
     justifyStart: {
       justifyContent: 'flex-start',
