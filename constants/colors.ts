@@ -10,7 +10,8 @@ export const colors = {
   secondary: {
     main: '#3498DB',    // Bright blue
     light: '#5DADE2',   // Light blue
-    dark: '#2980B9',    // Dark blue
+    dark: '#0b64da',  
+    // Dark blue
   },
   
   // Success colors

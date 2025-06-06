@@ -33,5 +33,54 @@
     "description": "Bus Ticket",
     "amount": 2.5,
     "category": "Transport"
+  },
+  {
+    "id": "tx006",
+    "date": "2025-05-05",
+    "description": "Movie Ticket",
+    "amount": 15.0,
+    "category": "Entertainment"
+  },
+  {
+    "id": "tx007",
+    "date": "2025-05-06",
+    "description": "Dinner",
+    "amount": 30.0,
+    "category": "Food & Drinks"
+  },
+  {
+    "id": "tx008",
+    "date": "2025-05-07",
+    "description": "Dinner",
+    "amount": 30.0,
+    "category": "Food & Drinks"
+  },
+  {
+    "id": "tx009",
+    "date": "2025-05-08",
+    "description": "Dinner",
+    "amount": 30.0,
+    "category": "Food & Drinks"
+  },
+  {
+    "id": "tx010",
+    "date": "2025-05-09",
+    "description": "Dinner",
+    "amount": 30.0,
+    "category": "Food & Drinks"
+  },
+  {
+    "id": "tx011",
+    "date": "2025-05-10",
+    "description": "Dinner",
+    "amount": 30.0,
+    "category": "Food & Drinks"
+  },
+  {
+    "id": "tx012",
+    "date": "2025-05-11",
+    "description": "Dinner",
+    "amount": 30.0,
+    "category": "Food & Drinks"
   }
 ]

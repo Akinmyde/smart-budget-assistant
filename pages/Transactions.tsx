@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, SectionList, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SectionList,
+  TouchableOpacity,
+} from "react-native";
 import PageWrapper from "../components/PageWrapper";
 import { colors } from "../constants/colors";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -7,6 +13,7 @@ import transactionsDummyData from "../data/transactions.json";
 import { Transaction } from "../types/transactions";
 import { groupTransactionsByCategory, getTotalSpending } from "../utils";
 import TransactionDetails from "../components/TransactionDetails";
+import Header from "../components/Header";
 
 const transactions: Transaction[] = transactionsDummyData;
 const totalSpending = getTotalSpending(transactions);
@@ -21,15 +28,7 @@ const Transactions = () => {
 
   return (
     <PageWrapper>
-      <View style={styles.headerRow}>
-        <Ionicons
-          name="arrow-back-outline"
-          size={24}
-          color={colors.primary.main}
-        />
-        <Text style={styles.headerTitle}>Transactions</Text>
-        <View></View>
-      </View>
+      <Header title="Transactions" />
       <SectionList
         sections={[
           {
@@ -40,16 +39,29 @@ const Transactions = () => {
         keyExtractor={(item) => item.category}
         renderItem={({ item }) => (
           <View>
-            <TouchableOpacity onPress={() => handleToggle(item.category)} activeOpacity={0.7}>
+            <TouchableOpacity
+              onPress={() => handleToggle(item.category)}
+              activeOpacity={0.7}
+            >
               <View style={styles.categoryRow}>
                 <View style={styles.iconBox}>
-                  <MaterialIcons name="category" size={24} color={colors.primary.main} />
+                  <MaterialIcons
+                    name="category"
+                    size={24}
+                    color={colors.primary.main}
+                  />
                 </View>
                 <View style={{ flex: 1, justifyContent: "center" }}>
                   <Text style={styles.categoryName}>{item.category}</Text>
-                  <Text style={styles.transactionCount}>{item.data.length} {item.data.length === 1 ? "transaction" : "transactions"}</Text>
+                  <Text style={styles.transactionCount}>
+                    {item.data.length}{" "}
+                    {item.data.length === 1 ? "transaction" : "transactions"}
+                  </Text>
                 </View>
-                <Text style={styles.amount}>${item.data.reduce((sum, tx) => sum + tx.amount, 0).toFixed(2)}</Text>
+                <Text style={styles.amount}>
+                  $
+                  {item.data.reduce((sum, tx) => sum + tx.amount, 0).toFixed(2)}
+                </Text>
               </View>
             </TouchableOpacity>
             {expanded === item.category && (
@@ -74,13 +86,6 @@ const Transactions = () => {
 };
 
 const styles = StyleSheet.create({
-  headerRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  headerTitle: { fontSize: 22, fontWeight: "bold", color: colors.primary.main },
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
