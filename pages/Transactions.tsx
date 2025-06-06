@@ -8,20 +8,17 @@ import {
 import PageWrapper from "../components/PageWrapper";
 import { COLORS, SPACING } from "../constants/theme";
 import { MaterialIcons } from "@expo/vector-icons";
-import transactionsDummyData from "../data/transactions.json";
-import { Transaction } from "../types/transactions";
-import { groupTransactionsByCategory, getTotalSpending } from "../utils";
+import { groupTransactionsByCategory } from "../utils";
 import TransactionDetails from "../components/TransactionDetails";
 import Header from "../components/Header";
 import { BodyText, Subheading } from "../components/StyledText";
 import { commonStyles } from "../styles/commonStyles";
-
-const transactions: Transaction[] = transactionsDummyData;
-const totalSpending = getTotalSpending(transactions);
-const groupedTransactions = groupTransactionsByCategory(transactions);
+import { useAppContext } from "../context/AppContext";
 
 const Transactions = () => {
   const [expanded, setExpanded] = useState<string | null>(null);
+  const { transactions, totalSpending } = useAppContext();
+  const groupedTransactions = groupTransactionsByCategory(transactions);
 
   const handleToggle = (category: string) => {
     setExpanded(expanded === category ? null : category);

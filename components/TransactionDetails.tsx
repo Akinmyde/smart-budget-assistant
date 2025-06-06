@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet  } from "react-native";
-import { Transaction } from "../types/transactions";
+import { Transaction } from "../types/transaction";
 import { COLORS } from "../constants/theme";
 import { dateFormatter } from "../utils";
 import { BodyText } from "./StyledText";

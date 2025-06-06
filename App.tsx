@@ -8,6 +8,7 @@ import Budget from "./pages/Budget";
 import Transactions from "./pages/Transactions";
 import FinanceAssistance from "./pages/FinanceAssistance";
 import { RootStackParamList, RootTabParamList } from "./types/navigation";
+import { AppProvider } from "./context/AppContext";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -60,9 +61,11 @@ const TabNavigator = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="MainTabs" component={TabNavigator} />
-      </Stack.Navigator>
+      <AppProvider>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="MainTabs" component={TabNavigator} />
+        </Stack.Navigator>
+      </AppProvider>
     </NavigationContainer>
   );
 }

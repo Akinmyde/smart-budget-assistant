@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import {
   View,
   Text,
@@ -11,28 +11,17 @@ import PageWrapper from "../components/PageWrapper";
 import { COLORS } from "../constants/theme";
 import Header from "../components/Header";
 import { BodyText, Heading } from "../components/StyledText";
-import transactionsDummyData from "../data/transactions.json";
-import { getCategorySpending, getUniqueCategories } from "../utils";
 import Input from "../components/Input";
 import { commonStyles } from "../styles/commonStyles";
-
-const initialCategories = getUniqueCategories(transactionsDummyData).map((category) => ({
-    name: category,
-    spent: getCategorySpending(transactionsDummyData, category),
-    budget: 0,
-}));
+import { useAppContext } from "../context/AppContext";
 
 const Budget = () => {
-  const [categories, setCategories] = useState(initialCategories);
+  const { categories, updateCategoryBudget } = useAppContext();
 
   const totalBudget = useMemo(() => categories.reduce((acc, cat) => acc + cat.budget, 0), [categories]);
 
-  const handleCategoryBudgetChange = (idx: number, value: string) => {
-    setCategories((prev) =>
-      prev.map((cat, i) =>
-        i === idx ? { ...cat, budget: parseInt(value) || 0 } : cat
-      )
-    );
+  const handleCategoryBudgetChange = (categoryName: string, value: string) => {
+    updateCategoryBudget(categoryName, parseInt(value) || 0);
   };
 
   const handleSave = () => {
@@ -61,7 +50,7 @@ const Budget = () => {
           </View>
         </View>
         <Heading variant="heading" style={styles.header}>Categories</Heading>
-        {categories.map((category, idx) => (
+        {categories.map((category) => (
           <View key={category.name} style={styles.categoryBlock}>
             <View style={[commonStyles.row, commonStyles.spaceBetween, commonStyles.alignCenter]}>
               <View>
@@ -89,20 +78,13 @@ const Budget = () => {
             </View>
             <Input
               value={category.budget.toString()}
-              onChangeText={(value) => handleCategoryBudgetChange(idx, value)}
+              onChangeText={(value) => handleCategoryBudgetChange(category.name, value)}
               placeholder="$0"
               label="Set Budget"
             />  
-            {idx !== categories.length - 1 && <View style={styles.divider} />}
+            {category !== categories[categories.length - 1] && <View style={styles.divider} />}
           </View>
         ))}
-        {/* <TouchableOpacity
-          style={styles.saveButton}
-          onPress={handleSave}
-          activeOpacity={0.85}
-        >
-          <BodyText variant="subheading" style={styles.saveButtonText}>Save Budgets</BodyText>
-        </TouchableOpacity> */}
       </ScrollView>
     </PageWrapper>
   );

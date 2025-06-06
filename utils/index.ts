@@ -1,4 +1,4 @@
-import { Transaction } from "../types/transactions";
+import { Transaction } from "../types/transaction";
 
 export const groupTransactionsByCategory = (transactions: Transaction[]) => {
     const grouped: Record<string, Transaction[]> = {};
