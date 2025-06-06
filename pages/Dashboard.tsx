@@ -2,7 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import PageWrapper from "../components/PageWrapper";
-import { colors } from "../constants/colors";
+import { COLORS } from "../constants/theme";
+import { commonStyles } from "../styles/commonStyles";
 
 const Dashboard = () => {
   return (
@@ -11,7 +12,7 @@ const Dashboard = () => {
     <View style={styles.headerRow}>
       <View></View>
       <Text style={styles.headerTitle}>Overview</Text>
-      <Ionicons name="sparkles-outline" size={24} color={colors.primary.main} />
+      <Ionicons name="sparkles-outline" size={24} color={COLORS.primary.main} />
     </View>
 
     {/* Spending this month */}
@@ -49,49 +50,49 @@ const Dashboard = () => {
 
 const styles = StyleSheet.create({
     headerRow: {
-      flexDirection: 'row',
+      ...commonStyles.row,
       justifyContent: 'space-between',
       alignItems: 'center',
       paddingTop: 20,
       paddingBottom: 10,
     },
-    headerTitle: { fontSize: 22, fontWeight: 'bold', color: colors.primary.main },
+    headerTitle: { fontSize: 22, fontWeight: 'bold', color: COLORS.primary.main },
     section: { marginBottom: 18, marginTop: 28 },
-    sectionTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 10, color: colors.primary.main },
-    spentRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-    spentLabel: { fontSize: 16, color: colors.neutral.text.secondary },
-    spentValue: { fontSize: 16, color: colors.primary.main, fontWeight: 'bold' },
+    sectionTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 10, color: COLORS.primary.main },
+    spentRow: { ...commonStyles.row, justifyContent: 'space-between', alignItems: 'center' },
+    spentLabel: { fontSize: 16, color: COLORS.neutral.text.secondary },
+    spentValue: { fontSize: 16, color: COLORS.primary.main, fontWeight: 'bold' },
     progressBarBg: {
       height: 8,
-      backgroundColor: colors.ui.progress.background,
+      backgroundColor: COLORS.ui.progress.background,
       borderRadius: 8,
       marginVertical: 8,
       overflow: 'hidden',
     },
     progressBarFill: {
       height: 8,
-      backgroundColor: colors.ui.progress.fill,
+      backgroundColor: COLORS.ui.progress.fill,
       borderRadius: 8,
     },
-    budgetText: { color: colors.neutral.text.secondary, fontSize: 14 },
-    indicatorRow: { flexDirection: 'row', gap: 16 },
+    budgetText: { color: COLORS.neutral.text.secondary, fontSize: 14 },
+    indicatorRow: { ...commonStyles.row, gap: 16 },
     indicatorCard: {
       flex: 1,
-      backgroundColor: colors.ui.card.background,
+      backgroundColor: COLORS.ui.card.background,
       borderRadius: 12,
       borderWidth: 1,
-      borderColor: colors.ui.card.border,
+      borderColor: COLORS.ui.card.border,
       padding: 18,
       alignItems: 'flex-start',
-      shadowColor: colors.ui.card.shadow,
+      shadowColor: COLORS.ui.card.shadow,
       shadowOpacity: 0.03,
       shadowRadius: 4,
       elevation: 2,
       marginRight: 0,
     },
-    indicatorLabel: { color: colors.neutral.text.secondary, fontSize: 15, marginBottom: 4 },
-    indicatorValue: { fontSize: 22, fontWeight: 'bold', color: colors.primary.main },
-    indicatorChange: { color: colors.success.main, fontWeight: 'bold', fontSize: 15, marginTop: 2 },
+    indicatorLabel: { color: COLORS.neutral.text.secondary, fontSize: 15, marginBottom: 4 },
+    indicatorValue: { fontSize: 22, fontWeight: 'bold', color: COLORS.primary.main },
+    indicatorChange: { color: COLORS.success.main, fontWeight: 'bold', fontSize: 15, marginTop: 2 },
   });
 
 export default Dashboard;

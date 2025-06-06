@@ -1,6 +1,12 @@
 import React from "react";
-import { SafeAreaView, View, StyleSheet } from "react-native";
-import { colors } from "../constants/colors";
+import {
+  SafeAreaView,
+  View,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
+import { COLORS } from "../constants/theme";
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -8,17 +14,23 @@ interface PageWrapperProps {
 
 const PageWrapper = ({ children }: PageWrapperProps) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>{children}</View>
-    </SafeAreaView>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+    >
+      <SafeAreaView style={styles.container}>
+        <View style={styles.content}>{children}</View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.neutral.background,
-  },  
+    backgroundColor: COLORS.neutral.background,
+  },
   content: {
     flex: 1,
     marginHorizontal: 20,

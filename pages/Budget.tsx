@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -9,21 +9,23 @@ import {
   Alert,
 } from "react-native";
 import PageWrapper from "../components/PageWrapper";
-import { colors } from "../constants/colors";
+import { COLORS } from "../constants/theme";
 import Header from "../components/Header";
+import { Heading } from "../components/StyledText";
+import transactionsDummyData from "../data/transactions.json";
+import { getCategorySpending, getUniqueCategories } from "../utils";
 
-// Dummy categories and spending for demonstration
-const initialCategories = [
-  { name: "Groceries", spent: 300, budget: 500 },
-  { name: "Dining Out", spent: 240, budget: 300 },
-  { name: "Transportation", spent: 100, budget: 200 },
-];
+const initialCategories = getUniqueCategories(transactionsDummyData).map((category) => ({
+    name: category,
+    spent: getCategorySpending(transactionsDummyData, category),
+    budget: 0,
+}));
 
-const initialTotalBudget = 2500;
 
 const Budget = () => {
-  const [totalBudget, setTotalBudget] = useState(initialTotalBudget.toString());
   const [categories, setCategories] = useState(initialCategories);
+
+  const totalBudget = useMemo(() => categories.reduce((acc, cat) => acc + cat.budget, 0), [categories]);
 
   const handleCategoryBudgetChange = (idx: number, value: string) => {
     setCategories((prev) =>
@@ -44,7 +46,7 @@ const Budget = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 32, paddingHorizontal: 0 }}
       >
-        <Text style={styles.header}>Monthly Budget</Text>
+        <Heading variant="heading">Monthly Budget</Heading>
         <View style={styles.section}>
           <View style={styles.rowBetween}>
             <View>
@@ -54,7 +56,7 @@ const Budget = () => {
               </Text>
             </View>
             <Text style={styles.totalBudget}>
-              ${parseInt(totalBudget).toLocaleString()}
+              ${totalBudget.toLocaleString()}
             </Text>
           </View>
         </View>
@@ -74,7 +76,11 @@ const Budget = () => {
               <View
                 style={[
                   styles.progressBarFill,
-                  { width: `${Math.min(category.spent / category.budget, 1) * 100}%` },
+                  {
+                    width: `${
+                      Math.min(category.spent / category.budget, 1) * 100
+                    }%`,
+                  },
                 ]}
               />
             </View>
@@ -108,7 +114,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 24,
     fontWeight: "bold",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
     marginTop: 12,
     marginBottom: 18,
   },
@@ -118,7 +124,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
     marginTop: 18,
     marginBottom: 10,
   },
@@ -134,16 +140,16 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 17,
     fontWeight: "bold",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
   },
   subLabel: {
-    color: colors.neutral.text.secondary,
+    color: COLORS.neutral.text.secondary,
     fontSize: 14,
   },
   totalBudget: {
     fontSize: 20,
     fontWeight: "bold",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
   },
   categoryBlock: {
     marginBottom: 0,
@@ -153,70 +159,70 @@ const styles = StyleSheet.create({
   catName: {
     fontSize: 16,
     fontWeight: "bold",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
   },
   catDesc: {
-    color: colors.neutral.text.secondary,
+    color: COLORS.neutral.text.secondary,
     fontSize: 13,
   },
   catBudget: {
     fontSize: 16,
     fontWeight: "bold",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
   },
   progressBarBg: {
     height: 8,
-    backgroundColor: colors.neutral.border,
+    backgroundColor: COLORS.neutral.border,
     borderRadius: 8,
     marginVertical: 8,
     overflow: "hidden",
   },
   progressBarFill: {
     height: 8,
-    backgroundColor: colors.primary.main,
+    backgroundColor: COLORS.primary.main,
     borderRadius: 8,
   },
   catSpent: {
     fontSize: 15,
-    color: colors.neutral.text.secondary,
+    color: COLORS.neutral.text.secondary,
   },
   inputLabel: {
     fontSize: 14,
-    color: colors.primary.main,
+    color: COLORS.primary.main,
     marginBottom: 4,
     marginTop: 2,
   },
   input: {
     borderWidth: 1,
     height: 40,
-    borderColor: colors.neutral.border,
+    borderColor: COLORS.neutral.border,
     borderRadius: 8,
     padding: 8,
     fontSize: 16,
-    color: colors.primary.main,
-    backgroundColor: colors.neutral.white,
+    color: COLORS.primary.main,
+    backgroundColor: COLORS.neutral.white,
     marginBottom: 2,
   },
   divider: {
     height: 1,
-    backgroundColor: colors.neutral.border,
+    backgroundColor: COLORS.neutral.border,
     marginTop: 18,
     marginBottom: 8,
     marginHorizontal: -16,
   },
   saveButton: {
-    backgroundColor: colors.secondary.dark,
+    backgroundColor: COLORS.secondary.dark,
     borderRadius: 12,
     paddingVertical: 16,
     alignItems: "center",
-    marginTop: 24,  
-    shadowColor: colors.primary.dark,
+    marginTop: 24,
+    shadowColor: COLORS.primary.dark,
     shadowOpacity: 0.13,
     shadowRadius: 8,
     elevation: 2,
   },
   saveButtonText: {
-    color: colors.neutral.white,
+    color: COLORS.neutral.white,
     fontWeight: "bold",
     fontSize: 18,
     letterSpacing: 0.5,

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import PageWrapper from "../components/PageWrapper";
-import { colors } from "../constants/colors";
+import { COLORS } from "../constants/theme";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import transactionsDummyData from "../data/transactions.json";
 import { Transaction } from "../types/transactions";
@@ -48,7 +48,7 @@ const Transactions = () => {
                   <MaterialIcons
                     name="category"
                     size={24}
-                    color={colors.primary.main}
+                    color={COLORS.primary.main}
                   />
                 </View>
                 <View style={{ flex: 1, justifyContent: "center" }}>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
     marginBottom: 20,
   },
   categoryRow: {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 12,
-    backgroundColor: colors.neutral.background,
+    backgroundColor: COLORS.neutral.background,
     alignItems: "center",
     justifyContent: "center",
     marginRight: 16,
@@ -110,11 +110,11 @@ const styles = StyleSheet.create({
   categoryName: {
     fontSize: 18,
     fontWeight: "500",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
   },
   transactionCount: {
     fontSize: 15,
-    color: colors.secondary.dark,
+    color: COLORS.secondary.dark,
     marginTop: 2,
     textDecorationLine: "underline",
     fontWeight: "400",
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   amount: {
     fontSize: 18,
     fontWeight: "500",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
     marginLeft: 12,
     alignSelf: "center",
   },
@@ -133,17 +133,17 @@ const styles = StyleSheet.create({
     marginTop: 24,
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: colors.neutral.border,
+    borderTopColor: COLORS.neutral.border,
   },
   totalLabel: {
     fontSize: 18,
     fontWeight: "bold",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
   },
   totalAmount: {
     fontSize: 18,
     fontWeight: "bold",
-    color: colors.primary.main,
+    color: COLORS.primary.main,
   },
 });
 
