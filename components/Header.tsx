@@ -1,23 +1,42 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { COLORS } from "../constants/theme";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+
+type RootTabParamList = {
+  Home: undefined;
+  Budget: undefined;
+  Transactions: undefined;
+  AskAI: undefined;
+};
+
+type NavigationProp = BottomTabNavigationProp<RootTabParamList>;
 
 interface HeaderProps {
   title: string;
 }
 
 const Header = ({ title }: HeaderProps) => {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <View style={styles.headerRow}>
+      <Ionicons
+        name="arrow-back-outline"
+        size={24}
+        color={COLORS.primary.main}
+      />
+      <Text style={styles.headerTitle}>{title}</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("AskAI")}>
         <Ionicons
-          name="arrow-back-outline"
+          name="sparkles-outline"
           size={24}
           color={COLORS.primary.main}
         />
-        <Text style={styles.headerTitle}>{title}</Text>
-        <Ionicons name="sparkles-outline" size={24} color={COLORS.primary.main} />
-      </View>
+      </TouchableOpacity>
+    </View>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet  } from "react-native";
 import { Transaction } from "../types/transactions";
-import { colors } from "../constants/colors";
+import { COLORS } from "../constants/theme";
 import { dateFormatter } from "../utils";
 
 interface TransactionDetailsProps {
@@ -35,16 +35,16 @@ const styles = StyleSheet.create({
     },
     transactionDesc: {
       flex: 1,
-      color: colors.primary.main,
+      color: COLORS.primary.main,
     },
     transactionDate: {
-      color: colors.neutral.text.secondary,
+      color: COLORS.neutral.text.secondary,
       fontSize: 13,
       marginLeft: 8,
       marginRight: 8,
     },
     transactionAmount: {
-      color: colors.primary.main,
+      color: COLORS.primary.main,
       fontWeight: "500",
     },
 });
