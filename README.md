@@ -1,4 +1,4 @@
-# 🧠 Smart Budget Assistant – Take-Home Task
+# 🧠 Smart Budget Assistant
 
 _This repo includes only the starter app. Your task is to implement the full features described below._
 
@@ -15,39 +15,15 @@ Please implement the following (focus on logic and structure, not perfect visual
    - Load and display the mock transaction list from `data/transactions.json`
    - Group transactions by `category`
    - Show total spending per category and total spent overall
-   - [optional] Use a **virtualized list** (e.g. `FlatList`) for performance if the dataset is large
 
 2. **Budget Input**
 
    - Allow users to input a monthly budget per category
-   - [optional] Show a visual indication (e.g., progress bar, color) of spending vs budget
 
 3. **(Optional) AI Prompt**
    - Add a simple text input where user can ask e.g. _"How can I save money next month?"_
    - Show a mock reply (hardcoded or GPT-like)
 
----
-
-## 🧪 What We’re Looking For
-
-- Clean structure (components, state, screens, etc.)
-- Clear code and reasonable UI
-- Thoughtful trade-offs, even if incomplete
-- [Optional] Use of **virtualized rendering** for large lists
-- Bonus: typed code, state management patterns, or extra polish
-
----
-
-## ⏱ Timebox
-
-**Please don’t spend more than ~3 hours.**  
-It’s okay to leave comments or incomplete sections if needed.
-
----
-
-## Notes for Candidate
-
-You are free to remove or modify any pre-existing code in `App.tsx` to suit your implementation. Feel free to restructure components, screens, or navigation as needed to complete the assignment.
 
 ## 🚀 Getting Started
 
@@ -89,7 +65,3 @@ If the project crashes with a `too many open files` error during `npx expo start
 watchman watch-del-all
 npx expo start --clear
 ```
-
-## 🙏 Thanks!
-
-We appreciate your time and look forward to your submission 🙌
